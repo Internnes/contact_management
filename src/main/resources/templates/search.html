@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Contacts</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+        }
+
+        h1, h2 {
+            color: #333;
+            text-align: center;
+            font-size: 36px;
+            margin-top: 40px;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #555;
+            margin-top: 30px;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            width: 80%;
+            max-width: 600px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        form:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            font-size: 18px;
+            margin-right: 10px;
+            color: #444;
+            transition: color 0.3s ease;
+        }
+
+        label:hover {
+            color: #4CAF50;
+        }
+
+        input[type="text"] {
+            padding: 12px 15px;
+            font-size: 16px;
+            width: 300px;
+            margin-right: 15px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4CAF50;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+
+        /* Results Styling */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 40px;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        li {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        li:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        p {
+            font-size: 16px;
+            color: #555;
+            margin: 8px 0;
+            transition: color 0.3s ease;
+        }
+
+        p:hover {
+            color: #4CAF50;
+        }
+
+        hr {
+            border: 1px solid #f0f0f0;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Contacts by City</h1>
+    <form action="/search" method="get">
+        <label for="city">Enter City:</label>
+        <input type="text" id="city" name="city" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <h2>Results:</h2>
+    <ul>
+        <li th:each="contact : ${contacts}">
+            <p th:text="'Name: ' + ${contact.name}"></p>
+            <p th:text="'Mobile: ' + ${contact.mobile}"></p>
+            <p th:text="'City: ' + ${contact.city}"></p>
+            <p th:text="'Address: ' + ${contact.address}"></p>
+            <hr/>
+        </li>
+    </ul>
+</body>
+</html>
